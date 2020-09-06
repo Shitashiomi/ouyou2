@@ -2,6 +2,17 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_currect_user, only: [:update, :edit]
 
+  def follow_user
+    user = User.find(params[:id])
+    @users = user.following_user
+  end
+
+  def follower_user
+    user = User.find(params[:id])
+    @users = user.follower_user
+  end
+
+
   def show
     @user = User.find(params[:id])
     @books = Book.all
